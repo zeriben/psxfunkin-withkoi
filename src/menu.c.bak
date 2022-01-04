@@ -677,6 +677,7 @@ void Menu_Tick(void)
 				{"4", StageId_4_1, "MOMMY MUST MURDER", {"SATIN PANTIES", "HIGH", "MILF"}},
 				{"5", StageId_5_1, "RED SNOW", {"COCOA", "EGGNOG", "WINTER HORRORLAND"}},
 				{"6", StageId_6_1, "HATING SIMULATOR", {"SENPAI", "ROSES", "THORNS"}},
+				{"7", StageId_7_1, "TANKMAN", {"UGH", "GUNS", "STRESS"}},
 			};
 			
 			//Initialize page

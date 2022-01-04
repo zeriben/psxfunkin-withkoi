@@ -1,11 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\iso",
-    "\\iso\\week1",
     "\\src",
+    "\\src\\character",
     "\\src\\stage"
   ],
-  "SelectedNode": "\\src\\stage.c",
   "PreviewInSolutionExplorer": false
 }

@@ -3,7 +3,7 @@
   License, v. 2.0. If a copy of the MPL was not distributed with this
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
-
+// huge shoutout to igorsou30000000000000000
 #include "week5.h"
 
 #include "../archive.h"
@@ -42,7 +42,7 @@ void Back_Week5_DrawBG(StageBack *back)
 	fx = stage.camera.x;
 	fy = stage.camera.y;
 	
-	RECT snow_src = {0, 215, 256,41};
+	RECT snow_src = {120, 155, 136, 101};
 	RECT_FIXED snow_dst = {
 		FIXED_DEC(-350,1) - fx,
 		FIXED_DEC(44,1) - fy,
@@ -51,7 +51,11 @@ void Back_Week5_DrawBG(StageBack *back)
 	};
 	
 	Stage_DrawTex(&this->tex_back2, &snow_src, &snow_dst, stage.camera.bzoom);
-
+	snow_src.y = 255; snow_src.h = 0;
+	snow_dst.y += snow_dst.h - FIXED_UNIT;
+	snow_dst.h *= 3;
+	Stage_DrawTex(&this->tex_back2, &snow_src, &snow_dst, stage.camera.bzoom);
+	
 	//Draw boppers
 	static const struct Back_Week5_LowerBop
 	{
@@ -79,16 +83,17 @@ void Back_Week5_DrawBG(StageBack *back)
 	}
 	
 	//Draw second floor
-	fx = stage.camera.x >> 2;
-	fy = stage.camera.y >> 2;
+	fx = stage.camera.x;
+	fy = stage.camera.y;
 	
 	static const struct Back_Week5_FloorPiece
 	{
 		RECT src;
 		fixed_t scale;
 	} floor_piece[] = {
-		{{  0, 251, 256, 41}, FIXED_DEC(-220,1)},
-		{{  0, 251, 256, 41}, FIXED_DEC(-115,1)},
+		{{  0, 0,  0,   0}, FIXED_DEC(14,10)},
+		{{  0, 0,   0,   0}, FIXED_DEC(7,1)},
+		{{  0, 0,   0,   0}, FIXED_DEC(14,10)},
 	};
 	
 	RECT_FIXED floor_dst = {
@@ -97,6 +102,15 @@ void Back_Week5_DrawBG(StageBack *back)
 		0,
 		FIXED_DEC(180,1)
 	};
+
+
+  RECT floor_src = {0,215,256,41};	
+RECT_FIXED floor_fill;	
+floor_fill.x = FIXED_DEC(-200,1) - fx,	
+floor_fill.y = FIXED_DEC( 60,1) - fy,
+	floor_fill.w = FIXED_DEC(400,1);	
+floor_fill.h = FIXED_DEC(110,1);
+	Stage_DrawTex(&this->tex_back1, &floor_src, &floor_fill, stage.camera.bzoom);	
 	
 	const struct Back_Week5_FloorPiece *floor_p = floor_piece;
 	for (size_t i = 0; i < COUNT_OF(floor_piece); i++, floor_p++)
@@ -138,16 +152,17 @@ void Back_Week5_DrawBG(StageBack *back)
 		fixed_t scale;
 	} wall_piece[] = {
 		{{  0, 0, 113, 256}, FIXED_DEC(1,1)},
-		{{113, 0,   6, 256}, FIXED_DEC(1,1)},
+		{{113, 0,   6, 256}, FIXED_DEC(15,1)},
 		{{119, 0, 137, 256}, FIXED_DEC(1,1)},
 	};
 	
 	RECT_FIXED wall_dst = {
-		FIXED_DEC(-180,1) - fx,
-		FIXED_DEC(-130,1) - fy,
+		FIXED_DEC(-165,1) - fx,
+		FIXED_DEC(-155,1) - fy,
 		0,
 		FIXED_DEC(190,1)
 	};
+	//this offsets are a bit uhhhhhhhhhhhhh "very bad" to say at the very least, if you add another character you might run into issues!!!!! -zeriben
 	
 	RECT wall_src = {0, 255, 0, 0};
 	RECT_FIXED wall_fill;
